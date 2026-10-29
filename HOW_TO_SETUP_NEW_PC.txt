@@ -1,0 +1,122 @@
+================================================================================
+          ESP32 AI MCP BRIDGE - COMPLETE SETUP GUIDE FOR A NEW PC
+================================================================================
+
+This guide explains how to set up and run this ESP32 MCP Bridge on any new
+computer from scratch in under 2 minutes.
+
+Once installed, your AI coding assistant (Antigravity IDE, Claude Desktop, etc.)
+can directly read serial logs, flash code, upload MicroPython scripts, reset,
+and control your physical ESP32 through natural conversation!
+
+--------------------------------------------------------------------------------
+1. PREREQUISITES (Before you begin)
+--------------------------------------------------------------------------------
+
+1. PYTHON:
+   - Install Python 3.10 or newer from: https://www.python.org/downloads/
+   - IMPORTANT: During installation, make sure you CHECK the box that says:
+     [X] "Add Python to PATH"
+
+2. USB DRIVER (Usually installed automatically by Windows):
+   - If your ESP32 is not recognized when plugged in, install the driver for
+     your board's USB chip:
+     * For CH340 / CH341 chips: Search "CH340 Windows Driver"
+     * For CP2102 / CP2104 chips: Search "Silicon Labs CP210x Driver"
+
+3. ESP32 HARDWARE:
+   - Connect your ESP32 to the computer using a micro-USB or USB-C cable.
+   - (Ensure your cable supports DATA, not just charging).
+
+--------------------------------------------------------------------------------
+2. AUTOMATED 1-CLICK INSTALLATION (Fastest Method)
+--------------------------------------------------------------------------------
+
+1. Copy or download this entire project folder to your new computer.
+2. Inside the folder, simply DOUBLE-CLICK:
+   
+   setup.bat
+
+What setup.bat does automatically for you:
+  [1] Detects your Python installation (bypasses any incomplete MinGW tools).
+  [2] Creates a clean, local virtual environment (.venv).
+  [3] Installs required libraries: mcp, pyserial, esptool.
+  [4] Auto-generates ".agents/mcp_config.json" with your PC's exact file paths.
+  [5] Runs a self-test to detect your connected ESP32 board.
+
+Once you see "SUCCESS! ESP32 MCP Bridge is ready on this computer", press any key
+to close the window.
+
+--------------------------------------------------------------------------------
+3. OPEN IN ANTIGRAVITY IDE
+--------------------------------------------------------------------------------
+
+1. Open Antigravity IDE.
+2. Go to: File -> Open Folder... -> select this "ESP32_AI_MCP" folder.
+3. Reload the window to mount the MCP server:
+   - Press: Ctrl + Shift + P
+   - Type: Developer: Reload Window
+   - Press Enter.
+
+That's it! The MCP server is now active.
+
+--------------------------------------------------------------------------------
+4. (OPTIONAL) MAKE IT WORK GLOBALLY ACROSS ALL PROJECTS
+--------------------------------------------------------------------------------
+
+By default, the setup above works inside this folder.
+If you want the ESP32 tools to be available in ANY project folder on your PC:
+
+1. Open or create this global configuration file in Notepad:
+   C:\Users\<YOUR_USERNAME>\.gemini\config\mcp_config.json
+
+2. Add this block under "mcpServers":
+
+   "esp32-bridge": {
+     "command": "C:\\path\\to\\ESP32_AI_MCP\\.venv\\Scripts\\python.exe",
+     "args": [
+       "C:\\path\\to\\ESP32_AI_MCP\\esp32_mcp.py"
+     ],
+     "env": {}
+   }
+
+   (Replace "C:\\path\\to\\ESP32_AI_MCP" with your actual folder path, using
+    double backslashes "\\" for Windows paths).
+
+3. Reload Antigravity Window (Ctrl + Shift + P -> Developer: Reload Window).
+Now you can talk to your ESP32 from any project on your computer!
+
+--------------------------------------------------------------------------------
+5. HOW TO TALK TO YOUR ESP32 IN CHAT
+--------------------------------------------------------------------------------
+
+Simply plug in your board and type any of these in chat:
+
+- "Check connected ports and find my ESP32"
+- "Show me what the ESP32 is printing right now"
+- "Get my chip details and MAC address"
+- "Send the command 'PING' to the board"
+- "Reset my ESP32 board"
+- "Upload a blink sketch to the board"
+- "Upload main.py with MicroPython code"
+- "Wipe the flash completely"
+
+The AI handles port discovery, connection, flashing, and serial reading
+automatically behind the scenes!
+
+--------------------------------------------------------------------------------
+6. TROUBLESHOOTING
+--------------------------------------------------------------------------------
+
+Q: AI says "No ESP32 detected on serial ports"?
+A: 1. Unplug and replug the USB cable.
+   2. Ensure the USB cable supports data transfer (some cheap cables are power-only).
+   3. Check Windows Device Manager -> "Ports (COM & LPT)" to see if your board
+      shows up. If it shows a yellow warning icon, install the CH340 or CP2102 driver.
+
+Q: MCP tools are not showing up in chat?
+A: Press Ctrl + Shift + P in Antigravity, run "Developer: Reload Window".
+   Type "@" in the chat box to verify "esp32-bridge" tools appear in the menu.
+
+================================================================================
+

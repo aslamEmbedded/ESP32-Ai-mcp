@@ -1,0 +1,14 @@
+# Virtual Environment
+.venv/
+env/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+
+# Arduino build artifacts
+build/
+*.bin
+*.elf
+
