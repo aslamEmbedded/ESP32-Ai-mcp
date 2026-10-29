@@ -64,3 +64,4 @@ void loop() {
     Serial.printf("[ESP32 Heartbeat] Millis: %lu | FreeHeap: %u\n", lastHeartbeat, ESP.getFreeHeap());
   }
 }
+

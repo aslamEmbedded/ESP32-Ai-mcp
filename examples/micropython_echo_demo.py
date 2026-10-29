@@ -23,3 +23,4 @@ while True:
     
     # Non-blocking check for serial input
     time.sleep(0.1)
+
